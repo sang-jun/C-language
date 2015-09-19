@@ -130,7 +130,7 @@ void delete_node(bTreeNode **root, element key)
 }
 
 //탐색
-void search(bTreeNode *root, element key)
+bTreeNode *search(bTreeNode *root, element key)
 {
 	bTreeNode *p = root;
 	while (p != NULL) {
@@ -142,65 +142,113 @@ void search(bTreeNode *root, element key)
 			p = p->left;
 			break;
 		case 0:
-			return ;
+			return p;
 		case 1:
 			p = p->right;
 			break;
 		}
 	}
 	printf("탐색 Error!!");
-	return;
+	return p;
+}
+
+bTreeNode *search_without_log(bTreeNode *root, element key) {
+	bTreeNode *p = root;
+	while (p != NULL) {
+
+		switch (compare(key, p->key)) {
+		case -1:
+			p = p->left;
+			break;
+		case 0:
+			return p;
+		case 1:
+			p = p->right;
+			break;
+		}
+	}
+	return p;
 }
 
 //노드의 갯수
-int get_node_count(bTreeNode *node) {
+int get_node_count(bTreeNode *root) {
 	int count = 0;
 
-	if (node != NULL)
-		count = 1 + get_node_count(node->left) + get_node_count(node->right);
+	if (root != NULL)
+		count = 1 + get_node_count(root->left) + get_node_count(root->right);
 
 	return count;
 }
 
+//단말 노드의 갯수
+int get_leaf_count(bTreeNode *root) {
+	int count = 0;
+	if (root != NULL) {
+		if (root->left == NULL && root->right == NULL) return 1;
+		else
+			count = get_leaf_count(root->left) + get_leaf_count(root->right);
+	}
+	return count;
+}
+
 //트리의 높이
-int get_tree_height(bTreeNode *node) {
+int get_tree_height(bTreeNode *root) {
 	int height = 0;
-	if (node != NULL)
-		height = 1 + max(get_tree_height(node->left), get_tree_height(node->right));
+	if (root != NULL)
+		height = 1 + max(get_tree_height(root->left), get_tree_height(root->right));
 
 	return height;
 }
 
 //최소 키값을 구하는 함수
-void search_min(bTreeNode *node) {
-	if (node == NULL) {
+void search_min(bTreeNode *root) {
+	if (root == NULL) {
 		printf("비었음");
 		return;
 	}
-	while (node != NULL) {
-		if (node->left == NULL) {
-			printf("%s", node->key.item);
+	while (root != NULL) {
+		if (root->left == NULL) {
+			printf("%s", root->key.item);
 			break;
 		}
-		else node = node->left;
+		else root = root->left;
 	}
 }
 
 //최대 키값을 구하는 함수
-void search_max(bTreeNode *node) {
-	if (node == NULL) {
+void search_max(bTreeNode *root) {
+	if (root == NULL) {
 		printf("비었음");
 		return;
 	}
-	while (node != NULL) {
-		if (node->right == NULL) {
-			printf("%s", node->key.item);
+	while (root != NULL) {
+		if (root->right == NULL) {
+			printf("%s", root->key.item);
 			break;
 		}
-		else node = node->right;
+		else root = root->right;
 	}
 
 }
+
+//해당 노드를 루트로 하는 트리의 정보 출력
+void print_node_info(bTreeNode **root, element key) {
+
+	bTreeNode *p = root;
+	bTreeNode *s = search_without_log(*root, key);
+
+	if (s != NULL) {
+		printf("%s의 조상노드 : %s \n", key.item, p->key);
+		printf("%s를 루트로 하는 트리의 높이 : %d \n", key.item, get_tree_height(s));
+		printf("%s를 루트로 하는 트리의 노드 개수 : %d \n", key.item, get_node_count(s));
+		printf("%s를 루트로 하는 트리의 왼쪽 서브트리 노드 개수 : %d \n", key.item, get_node_count(s->left));
+		printf("%s를 루트로 하는 트리의 오른쪽 서브트리 노드 개수 : %d \n", key.item, get_node_count(s->right));
+		printf("%s를 루트로 하는 트리의 단말 노드의 개수 : %d \n", key.item, get_leaf_count(s));
+	}
+	else printf("존재하지 않는 키");
+	
+}
+
 
 //키값을 입력받는 함수
 element input_data() {
@@ -227,9 +275,12 @@ int menu() {
 	printf("6: 노드의 탐색\n");
 	printf("7: 트리의 높이\n");
 	printf("8: 노드의 개수\n");
-	printf("9: 최소 키\n");
-	printf("10: 최대 키\n");
-	printf("0: 종료\n");
+	printf("9: 종료\n");
+	printf("10: 최소 키\n");
+	printf("11: 최대 키\n");
+	printf("12: 단말 노드의 개수\n");
+	printf("13: 노드 정보\n");
+	
 	printf("Which select ? :");
 
 	scanf_s("%d", &input);
@@ -242,7 +293,7 @@ void main() {
 	bTreeNode *root = NULL;
 	int input = -1;
 
-	while (input != 0) {
+	while (input != 9) {
 		input = menu();
 
 		printf("\n");
@@ -256,8 +307,10 @@ void main() {
 		case 6: search(root, input_data()); break;
 		case 7: printf("최소 키 : %d",get_tree_height(root)); break;
 		case 8: printf("최대 키 : %d",get_node_count(root)); break;
-		case 9: search_min(root); break;
-		case 10:search_max(root); break;
+		case 10: search_min(root); break;
+		case 11: search_max(root); break;
+		case 12: printf("%d",get_leaf_count(root)); break;
+		case 13: print_node_info(&root, input_data()); break;
 		default: printf("잘못된 입력입니다.\n"); break;
 		}
 
