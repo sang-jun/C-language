@@ -33,5 +33,17 @@
     <ClCompile Include="prob6.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="prob7.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="prob9.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="prob10.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="prob14.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
