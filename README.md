@@ -1,2 +1,2 @@
 # C-language
-C language practice
+C language practice & Project Euler
