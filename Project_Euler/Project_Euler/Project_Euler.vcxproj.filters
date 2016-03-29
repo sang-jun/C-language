@@ -51,5 +51,8 @@
     <ClCompile Include="prob18.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="prob19.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
