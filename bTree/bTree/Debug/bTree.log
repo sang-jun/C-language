@@ -1,0 +1,16 @@
+﻿빌드 시작: 2015-09-19 오후 7:19:07
+     1>2 노드의 "C:\workspace\C-language\bTree\bTree\bTree.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:prompt btree.c
+         btree.c
+     1>c:\workspace\c-language\btree\btree\btree.c(237): warning C4047: '초기화 중': 'bTreeNode *'의 간접 참조 수준이 'bTreeNode **'과(와) 다릅니다.
+     1>c:\workspace\c-language\btree\btree\btree.c(241): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 2 has type 'element'
+     1>c:\workspace\c-language\btree\btree\btree.c(258): warning C4013: 'gets'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\workspace\C-language\bTree\Debug\bTree.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\workspace\C-language\bTree\Debug\bTree.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\workspace\C-language\bTree\Debug\bTree.lib" /MACHINE:X86 Debug\btree.obj
+         bTree.vcxproj -> C:\workspace\C-language\bTree\Debug\bTree.exe
+     1>"C:\workspace\C-language\bTree\bTree\bTree.vcxproj" 프로젝트를 빌드했습니다(Build 대상).
+
+빌드했습니다.
+
+경과 시간: 00:00:00.27
